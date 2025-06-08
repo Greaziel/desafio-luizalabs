@@ -2,7 +2,6 @@ package com.example.desafioluizalabspessoadesenvolvedorabackend.interfaces;
 
 
 import com.example.desafioluizalabspessoadesenvolvedorabackend.dtos.CompraDTO;
-import com.example.desafioluizalabspessoadesenvolvedorabackend.dtos.ProdutoDTO;
 import com.example.desafioluizalabspessoadesenvolvedorabackend.dtos.UsuarioDTO;
 
 import java.io.IOException;
@@ -12,13 +11,13 @@ import java.util.List;
 
 public interface ICompraService {
 
-    List<UsuarioDTO> consultarPedidos(InputStream inputStream) throws IOException;
+    List<UsuarioDTO> processarArquivo(InputStream inputStream) throws IOException;
 
-    CompraDTO processarCompra(List<ProdutoDTO> produtos);
+    List<UsuarioDTO> consultarUsuarios();
 
 
-    List<CompraDTO> consultarPedidosPorId(Integer orderId);
+    List<UsuarioDTO> consultarPedidosPorId(Integer orderId);
 
-    List<CompraDTO> consultarPedidosPorData(Date dataInicio, Date dataFim);
+    List<UsuarioDTO> consultarPedidosPorData(Date dataInicio, Date dataFim);
 
 }
