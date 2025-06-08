@@ -5,19 +5,17 @@ import com.example.desafioluizalabspessoadesenvolvedorabackend.models.Produto;
 
 public class ProdutoMapper {
 
-    public Produto produtoDTOToProduto(ProdutoDTO produtoDTO){
+    public static Produto produtoDtoToProduto(ProdutoDTO produtoDTO) {
         Produto produto = new Produto();
-        produto.setProduto_id(produtoDTO.getProduto_id());
+        produto.setProduct_id(produtoDTO.getProduto_id());
         produto.setValue(produtoDTO.getValue());
-
         return produto;
     }
 
-    public ProdutoDTO produtoToProdutoDTO(Produto produto){
-        ProdutoDTO produtoDTO = new ProdutoDTO();
-        produtoDTO.setProduto_id(produto.getProduto_id());
-        produtoDTO.setValue(produto.getValue());
-
-        return produtoDTO;
+    public static ProdutoDTO produtoToProdutoDTO(Produto produto) {
+        ProdutoDTO dto = new ProdutoDTO();
+        dto.setProduto_id(produto.getProduct_id());
+        dto.setValue(produto.getValue());
+        return dto;
     }
 }
