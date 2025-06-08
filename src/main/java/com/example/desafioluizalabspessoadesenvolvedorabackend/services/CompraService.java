@@ -23,18 +23,16 @@ import java.util.stream.Collectors;
 @Service
 public class CompraService implements ICompraService {
 
-    private final List<ProdutoDTO> produtosMock = new ArrayList<>();
-
+    private List<UsuarioDTO> usuarios = new ArrayList<>();
     private static final AtomicInteger orderIdGenerator = new AtomicInteger(1);
 
     @Override
-    public List<UsuarioDTO> consultarPedidos(InputStream inputStream) throws IOException {
+    public List<UsuarioDTO> processarArquivo(InputStream inputStream) throws IOException {
         Map<Integer, UsuarioDTO> usuariosMap = new HashMap<>();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
-
                 int userId = Integer.parseInt(linha.substring(0, 10).trim().replaceFirst("^0+(?!$)", ""));
                 String name = linha.substring(10, 55).trim();
                 int orderId = Integer.parseInt(linha.substring(55, 65).trim().replaceFirst("^0+(?!$)", ""));
@@ -54,48 +52,54 @@ public class CompraService implements ICompraService {
                     return novo;
                 });
 
-
                 CompraDTO compra = usuario.getCompra();
                 compra.getProdutos().add(produto);
                 compra.setTotal(compra.getTotal() + value);
-
             }
+
         }
 
-        return new ArrayList<>(usuariosMap.values());
+        this.usuarios = new ArrayList<>(usuariosMap.values());
+        return this.usuarios;
 
     }
 
     @Override
-    public CompraDTO processarCompra(List<ProdutoDTO> produtos) {
-        Double total = produtos.stream()
-                .mapToDouble(p -> {
-                    try {
-                        return p.getValue();
-                    } catch (NumberFormatException e) {
-                        return 0.0; // ou lançar exceção
-                    }
+    public List<UsuarioDTO> consultarUsuarios() {
+        return usuarios;
+    }
+
+    @Override
+    public List<UsuarioDTO> consultarPedidosPorId(Integer orderId) {
+        return usuarios.stream()
+                .filter(usuario -> usuario.getCompra() != null && usuario.getCompra().getOrder_id().equals(orderId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UsuarioDTO> consultarPedidosPorData(Date dataInicio, Date dataFim) {
+        List<UsuarioDTO> resultado = usuarios.stream()
+                .filter(usuario -> {
+                    Date dataCompra = usuario.getCompra().getData();
+                    return dataCompra != null &&
+                            !dataCompra.before(dataInicio) &&
+                            !dataCompra.after(dataFim);
                 })
-                .sum();
+                .collect(Collectors.toList());
 
-        return null;
+        if (resultado.isEmpty()) {
+            System.out.println("Não foram encontrados dados");
+        }
+
+        return resultado;
     }
 
-    @Override
-    public List<CompraDTO> consultarPedidosPorId(Integer orderId) {
-        return List.of();
-    }
 
-    @Override
-    public List<CompraDTO> consultarPedidosPorData(Date dataInicio, Date dataFim) {
-        return List.of();
-    }
-
-    private Date parseData(String yyyymmdd) {
+    private Date parseData(String data) {
         try {
-            return new SimpleDateFormat("yyyyMMdd").parse(yyyymmdd);
+            return new SimpleDateFormat("yyyyMMdd").parse(data);
         } catch (ParseException e) {
-            throw new RuntimeException("Erro ao converter data: " + yyyymmdd, e);
+            throw new RuntimeException("Erro ao converter data: " + data, e);
         }
     }
 }
