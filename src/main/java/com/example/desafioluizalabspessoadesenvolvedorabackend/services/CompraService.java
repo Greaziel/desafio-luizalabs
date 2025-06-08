@@ -4,8 +4,9 @@ import com.example.desafioluizalabspessoadesenvolvedorabackend.dtos.CompraDTO;
 import com.example.desafioluizalabspessoadesenvolvedorabackend.dtos.ProdutoDTO;
 import com.example.desafioluizalabspessoadesenvolvedorabackend.dtos.UsuarioDTO;
 import com.example.desafioluizalabspessoadesenvolvedorabackend.interfaces.ICompraService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.example.desafioluizalabspessoadesenvolvedorabackend.mappers.UsuarioMapper;
+import com.example.desafioluizalabspessoadesenvolvedorabackend.models.Usuario;
+import com.example.desafioluizalabspessoadesenvolvedorabackend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +14,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CompraService implements ICompraService {
 
     private List<UsuarioDTO> usuarios = new ArrayList<>();
-    private static final AtomicInteger orderIdGenerator = new AtomicInteger(1);
+    private final UsuarioMapper usuarioMapper;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     public List<UsuarioDTO> processarArquivo(InputStream inputStream) throws IOException {
@@ -45,55 +45,57 @@ public class CompraService implements ICompraService {
 
                 UsuarioDTO usuario = usuariosMap.computeIfAbsent(userId, id -> {
                     UsuarioDTO novo = new UsuarioDTO();
-                    novo.setUserId(id);
+                    novo.setUser_id(id);
                     novo.setName(name);
-                    CompraDTO novaCompra = new CompraDTO(orderId, 0.0, dataCompra, new ArrayList<>());
-                    novo.setCompra(novaCompra);
+                    novo.setOrders(new ArrayList<>());
                     return novo;
                 });
 
-                CompraDTO compra = usuario.getCompra();
-                compra.getProdutos().add(produto);
+                CompraDTO compra = usuario.getOrders().stream()
+                        .filter(c -> c.getOrder_id().equals(orderId))
+                        .findFirst()
+                        .orElseGet(() -> {
+                            CompraDTO novaCompra = new CompraDTO(orderId, 0.0, dataCompra, new ArrayList<>());
+                            usuario.getOrders().add(novaCompra);
+                            return novaCompra;
+                        });
+
+                compra.getProducts().add(produto);
                 compra.setTotal(compra.getTotal() + value);
             }
 
         }
 
         this.usuarios = new ArrayList<>(usuariosMap.values());
+        List<Usuario> usuariosConvertidos = usuarios.stream()
+                .map(usuarioMapper::usuarioDTOToUsuario)
+                .toList();
+        usuarioRepository.saveAll(usuariosConvertidos);
         return this.usuarios;
+
 
     }
 
     @Override
     public List<UsuarioDTO> consultarUsuarios() {
-        return usuarios;
+        return usuarios = usuarioRepository.findAll()
+                .stream().map(usuarioMapper::usuarioToUsuarioDTO).toList();
     }
 
     @Override
     public List<UsuarioDTO> consultarPedidosPorId(Integer orderId) {
-        return usuarios.stream()
-                .filter(usuario -> usuario.getCompra() != null && usuario.getCompra().getOrder_id().equals(orderId))
-                .collect(Collectors.toList());
+        return usuarioRepository.buscarPorOrderId(orderId)
+                .stream()
+                .map(usuarioMapper::usuarioToUsuarioDTO)
+                .toList();
     }
 
     @Override
     public List<UsuarioDTO> consultarPedidosPorData(Date dataInicio, Date dataFim) {
-        List<UsuarioDTO> resultado = usuarios.stream()
-                .filter(usuario -> {
-                    Date dataCompra = usuario.getCompra().getData();
-                    return dataCompra != null &&
-                            !dataCompra.before(dataInicio) &&
-                            !dataCompra.after(dataFim);
-                })
-                .collect(Collectors.toList());
+        return usuarios = usuarioRepository.buscarPorDataCompra(dataInicio, dataFim)
+                .stream().map(usuarioMapper::usuarioToUsuarioDTO).toList();
 
-        if (resultado.isEmpty()) {
-            System.out.println("Não foram encontrados dados");
-        }
-
-        return resultado;
     }
-
 
     private Date parseData(String data) {
         try {

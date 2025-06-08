@@ -1,24 +1,34 @@
 package com.example.desafioluizalabspessoadesenvolvedorabackend.models;
 
-public class Produto {
+import jakarta.persistence.*;
 
-    private Integer produto_id;
+@Entity
+@Table(name = "Products")
+public class Produto {
+    @Id
+    private Integer product_id;
+
     private Double value;
+
+    @ManyToOne
+    @JoinColumn(name = "compra_id")
+    private Compra compra;
 
     public Produto() {
     }
 
-    public Produto(Integer produto_id, Double value) {
-        this.produto_id = produto_id;
+    public Produto(Integer product_id, Double value, Compra compra) {
+        this.product_id = product_id;
         this.value = value;
+        this.compra = compra;
     }
 
-    public Integer getProduto_id() {
-        return produto_id;
+    public Integer getProduct_id() {
+        return product_id;
     }
 
-    public void setProduto_id(Integer produto_id) {
-        this.produto_id = produto_id;
+    public void setProduct_id(Integer product_id) {
+        this.product_id = product_id;
     }
 
     public Double getValue() {
@@ -27,5 +37,13 @@ public class Produto {
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
     }
 }
