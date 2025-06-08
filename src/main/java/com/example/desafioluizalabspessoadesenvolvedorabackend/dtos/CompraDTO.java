@@ -14,6 +14,7 @@ public class CompraDTO {
 
     private Integer order_id;
     private Double total;
-    private Date data;
-    private List<ProdutoDTO> produtos;
+    private Date date;
+    private List<ProdutoDTO> products;
+
 }

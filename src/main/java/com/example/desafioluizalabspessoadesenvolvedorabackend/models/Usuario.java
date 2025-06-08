@@ -1,18 +1,27 @@
 package com.example.desafioluizalabspessoadesenvolvedorabackend.models;
 
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "users")
 public class Usuario {
 
+    @Id
     private Integer userId;
     private String name;
-    private Compra compra;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Compra> orders;
 
     public Usuario() {
     }
 
-    public Usuario(Integer userId, String name, Compra compra) {
+    public Usuario(Integer userId, String name, List<Compra> orders) {
         this.userId = userId;
         this.name = name;
-        this.compra = compra;
+        this.orders = orders;
     }
 
     public Integer getUserId() {
@@ -31,11 +40,11 @@ public class Usuario {
         this.name = name;
     }
 
-    public Compra getCompra() {
-        return compra;
+    public List<Compra> getOrders() {
+        return orders;
     }
 
-    public void setCompra(Compra compra) {
-        this.compra = compra;
+    public void setOrders(List<Compra> orders) {
+        this.orders = orders;
     }
 }

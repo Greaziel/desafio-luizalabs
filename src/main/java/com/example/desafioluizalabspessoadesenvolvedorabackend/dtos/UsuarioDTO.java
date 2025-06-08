@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioDTO {
 
-    private Integer userId;
+    private Integer user_id;
     private String name;
-    private CompraDTO compra;
+    private List<CompraDTO> orders;
 }
