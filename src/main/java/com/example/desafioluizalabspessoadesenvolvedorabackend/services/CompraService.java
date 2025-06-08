@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CompraService implements ICompraService {
 
-    private static List<ProdutoDTO> produtoDTO;
+    private final List<ProdutoDTO> produtoDTO;
 
-    private static CompraDTO compraDTO;
+    private final CompraDTO compraDTO;
 
     @Override
     public List<CompraDTO> consultarPedidos(InputStream inputStream) {
