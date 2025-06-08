@@ -1,5 +1,6 @@
 <h1> LuizaLabs- Desafio técnico</h1>
 
-### Project made by me for the entry of the beca challenge in Java.
+### Project developed by me for the technical challenge of Luiza Labs; I chose the Java programming language.
 
-#### This is a web application with the aim of matching donated pets with people who want to adopt.
+
+#### The goal of this challenge is to integrate two systems, one being a legacy system and the other one being an API REST.
