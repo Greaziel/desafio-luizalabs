@@ -76,8 +76,7 @@ http://localhost:8080/swagger-ui.html
 
 Desenvolvido por **Greaziel**  
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn--blue?style=social&logo=linkedin)](https://www.linkedin.com/in/greaziel/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn--blue?style=social&logo=linkedin)](https://www.linkedin.com/in/greaziel/)  
 
-
-[![Email](https://img.shields.io/badge/E--mail-greaziel@hotmail.com-red?style=flat&logo=gmail&logoColor=white)](mailto:greaziel@hotmail.com)  
+[![Email](https://img.shields.io/badge/E--mail-greaziel@hotmail.com-red?style=flat&logo=gmail&logoColor=white)](mailto:greaziel@hotmail.com)
 
