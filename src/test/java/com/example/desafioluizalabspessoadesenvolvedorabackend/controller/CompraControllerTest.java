@@ -95,7 +95,7 @@ public class CompraControllerTest {
         when(compraService.consultarPedidosPorData(filtro.getDataInicial(), filtro.getDataFinal()))
                 .thenReturn(listaMock);
 
-        ResponseEntity<?> response = compraController.consultarTodos(filtro);
+        ResponseEntity<?> response = compraController.consultarPorData(filtro);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(listaMock, response.getBody());
@@ -115,7 +115,7 @@ public class CompraControllerTest {
         when(compraService.consultarPedidosPorData(filtro.getDataInicial(), filtro.getDataFinal()))
                 .thenReturn(Collections.emptyList());
 
-        ResponseEntity<?> response = compraController.consultarTodos(filtro);
+        ResponseEntity<?> response = compraController.consultarPorData(filtro);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals("Não foram encontrados dados.", response.getBody());
