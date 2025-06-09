@@ -1,66 +1,83 @@
-# Projeto Desafio Técnico Luiza Labs
+# Desafio Técnico - Luiza Labs
 
-Este projeto foi desenvolvido para o desafio técnico da Luiza Labs utilizando **Java** com **Spring Boot**.
-
----
-
-## Visão Geral
-
-O objetivo deste desafio é integrar dois sistemas:
-
-- Um sistema legado que envia arquivos contendo dados desnormalizados.
-- Um novo sistema baseado em uma API REST para processar esses arquivos, armazenar os dados e disponibilizar consultas.
-
-A aplicação recebe arquivos via endpoint REST, processa o conteúdo e armazena os dados em um banco de dados **MySQL**.
+Este projeto foi desenvolvido como parte do desafio técnico da **Luiza Labs**, utilizando **Java** com **Spring Boot**.
 
 ---
 
-## Tecnologias Utilizadas
+## 🧭 Visão Geral
+
+O objetivo do desafio é integrar dois sistemas:
+
+- Um **sistema legado** que envia arquivos com dados desnormalizados.
+- Um **novo sistema** baseado em uma **API REST**, responsável por processar esses arquivos, armazenar os dados e permitir consultas estruturadas.
+
+A aplicação recebe os arquivos via endpoint REST, realiza o processamento e armazena os dados em um banco de dados **MySQL**.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
 
 - Java 17+
 - Spring Boot
 - MySQL
-- Swagger / OpenAPI para documentação da API
-- JUnit 5 e Mockito para testes unitários e mocks
-- Lombok para reduzir boilerplate
-- Maven como gerenciador de dependências
+- Maven
+- Swagger / OpenAPI (documentação interativa da API)
+- JUnit 5 + Mockito (testes unitários)
+- Lombok (eliminação de boilerplate)
 
 ---
 
-## Funcionalidades Principais
+## 🚀 Funcionalidades
 
-- Upload e processamento de arquivos legados via endpoint `/upload`
-- Consultas dos dados armazenados via endpoints RESTful
-- Filtro de dados por intervalo de datas
-- Documentação automática dos endpoints via Swagger UI
-- Testes automatizados garantindo qualidade e cobertura do código
+- 📤 Upload de arquivos legados via endpoint `/upload`
+- 🔍 Consulta de todos os usuários
+- 🔎 Consulta de pedidos por ID de usuário
+- 📆 Filtro de pedidos por intervalo de datas
+- 🧪 Testes automatizados
+- 📝 API documentada com Swagger UI
 
 ---
 
-## Documentação da API
+## 📚 Documentação da API
 
-A documentação interativa está disponível em:
+A documentação interativa dos endpoints pode ser acessada em:
 
 http://localhost:8080/swagger-ui.html
 
+### Exemplo:
 
-![image](https://github.com/user-attachments/assets/eff72844-daba-48db-8b70-1e8329f63521)
+![Swagger UI](https://github.com/user-attachments/assets/eff72844-daba-48db-8b70-1e8329f63521)
 
-Classes de DTO
+---
 
-![image](https://github.com/user-attachments/assets/78be3bb8-000f-4f6b-a0aa-42e640e13e59)
+## 🧾 Estrutura de Dados
 
-Mapeamento
+### DTOs
 
-![image](https://github.com/user-attachments/assets/e29d6190-857d-4386-9c62-6926b95cfd6d)
+![DTOs](https://github.com/user-attachments/assets/78be3bb8-000f-4f6b-a0aa-42e640e13e59)
+
+### Mapeamento
+
+![Mapeamento](https://github.com/user-attachments/assets/e29d6190-857d-4386-9c62-6926b95cfd6d)
+
+---
+
+## ✅ Boas Práticas Adotadas
+
+- Aplicação de princípios **SOLID**
+- Organização modular
+- Separação clara de responsabilidades (camadas Controller, Service, DTO)
+- Cobertura de testes automatizados
+- API REST bem definida e documentada
+
+---
+
+## 👨‍💻 Contato
+
+Desenvolvido por **Greaziel**  
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn--blue?style=social&logo=linkedin)](https://www.linkedin.com/in/greaziel/)
 
 
-Boas práticas
-Segue princípios SOLID e design modular.
+[![Email](https://img.shields.io/badge/E--mail-greaziel@hotmail.com-red?style=flat&logo=gmail&logoColor=white)](mailto:greaziel@hotmail.com)  
 
-Testes automatizados para garantir qualidade.
-
-API documentada para facilitar integrações.
-
-Contato
-Desenvolvido por Greaziel
