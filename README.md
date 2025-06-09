@@ -1,48 +1,48 @@
-# Desafio Técnico - Luiza Labs
+# 🚀 Desafio Técnico - Luiza Labs
 
-Este projeto foi desenvolvido como parte do desafio técnico da **Luiza Labs**, utilizando **Java** com **Spring Boot**.
+Projeto desenvolvido como parte do desafio técnico da **Luiza Labs**, utilizando **Java** com **Spring Boot**.
 
 ---
 
 ## 🧭 Visão Geral
 
-O objetivo do desafio é integrar dois sistemas:
+O desafio consiste na integração entre dois sistemas:
 
-- Um **sistema legado** que envia arquivos com dados desnormalizados.
-- Um **novo sistema** baseado em uma **API REST**, responsável por processar esses arquivos, armazenar os dados e permitir consultas estruturadas.
+- Um **sistema legado**, que envia arquivos com dados desnormalizados.
+- Um **novo sistema**, baseado em **API REST**, que processa esses arquivos, armazena os dados em banco e oferece consultas estruturadas.
 
-A aplicação recebe os arquivos via endpoint REST, realiza o processamento e armazena os dados em um banco de dados **MySQL**.
+A aplicação recebe os arquivos via endpoint, realiza o processamento e armazena os dados em um banco **MySQL**.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- Java 17+
-- Spring Boot
-- MySQL
-- Maven
-- Swagger / OpenAPI (documentação interativa da API)
-- JUnit 5 + Mockito (testes unitários)
-- Lombok (eliminação de boilerplate)
+- ✅ Java 17+
+- ✅ Spring Boot
+- ✅ MySQL
+- ✅ Maven
+- ✅ Swagger / OpenAPI
+- ✅ JUnit 5 + Mockito
+- ✅ Lombok
 
 ---
 
-## 🚀 Funcionalidades
+## ⚙️ Funcionalidades
 
-- 📤 Upload de arquivos legados via endpoint `/upload`
+- 📤 Upload de arquivos legados via `/upload`
 - 🔍 Consulta de todos os usuários
 - 🔎 Consulta de pedidos por ID de usuário
 - 📆 Filtro de pedidos por intervalo de datas
-- 🧪 Testes automatizados
-- 📝 API documentada com Swagger UI
+- 🧪 Testes automatizados com JUnit/Mockito
+- 📝 Documentação da API com Swagger
 
 ---
 
 ## 📚 Documentação da API
 
-A documentação interativa dos endpoints pode ser acessada em:
+Acesse via navegador:
 
-http://localhost:8080/swagger-ui.html
+👉 **[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)**
 
 ### Exemplo:
 
@@ -62,12 +62,12 @@ http://localhost:8080/swagger-ui.html
 
 ---
 
-## ✅ Boas Práticas Adotadas
+## ✅ Boas Práticas
 
 - Aplicação de princípios **SOLID**
-- Organização modular
-- Separação clara de responsabilidades (camadas Controller, Service, DTO)
-- Cobertura de testes automatizados
+- Separação de responsabilidades por camadas (Controller, Service, DTO)
+- Estrutura modular
+- Testes automatizados garantindo qualidade
 - API REST bem definida e documentada
 
 ---
@@ -77,6 +77,4 @@ http://localhost:8080/swagger-ui.html
 Desenvolvido por **Greaziel**  
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn--blue?style=social&logo=linkedin)](https://www.linkedin.com/in/greaziel/)  
-
 [![Email](https://img.shields.io/badge/E--mail-greaziel@hotmail.com-red?style=flat&logo=gmail&logoColor=white)](mailto:greaziel@hotmail.com)
-
