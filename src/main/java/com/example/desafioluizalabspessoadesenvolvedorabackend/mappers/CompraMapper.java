@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 public class CompraMapper {
 
-    private final ProdutoMapper produtoMapper = new ProdutoMapper();
-
     public static Compra compraDTOToCompra(CompraDTO compraDTO) {
 
         Compra compra = new Compra();
@@ -53,6 +51,5 @@ public class CompraMapper {
         }
 
         return dto;
-
     }
 }
